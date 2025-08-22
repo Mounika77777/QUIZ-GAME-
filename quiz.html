@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive programming quiz with multiple languages and difficulty levels">
+    <meta name="keywords" content="quiz, programming, education, javascript, python, java, react, html, css, sql, c++">
+    <meta name="author" content="Team Code.Dev">
+    <meta name="theme-color" content="#764ba2">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0idXJsKCNncmFkaWVudCkiLz4KPHBhdGggZD0iTTE2IDhDMTIuMzE0NyA4IDkgMTEuMzE0NyA5IDE1VjIzQzkgMjYuNjg1MyAxMi4zMTQ3IDMwIDE2IDMwQzE5LjY4NTMgMzAgMjMgMjYuNjg1MyAyMyAyM1YxNUMyMyAxMS4zMTQ3IDE5LjY4NTMgOCAxNiA4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE0IDE2QzE0IDE1LjQ0NzcgMTQuNDQ3NyAxNSAxNSAxNUgxN0MxNy41NTIzIDE1IDE4IDE1LjQ0NzcgMTggMTZWMjJDMTggMjIuNTUyMyAxNy41NTIzIDIzIDE3IDIzSDE1QzE0LjQ0NzcgMjMgMTQgMjIuNTUyMyAxNCAyMlYxNloiIGZpbGw9IiM2NjdlZWEiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwIiB5MT0iMCIgeDI9IjMyIiB5Mj0iMzIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N2VlYSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4=">
+    
+    <title>Quiz - Code.Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="quiz-styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Code.Dev</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="quiz.html" class="nav-link active">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container quiz-container">
+        <header>
+            <h1>🎯 Multi-Course Quiz Game</h1>
+            <p>Test your knowledge across multiple programming languages and technologies!</p>
+        </header>
+
+        <!-- Course and Difficulty Selection -->
+        <div id="selection-screen" class="screen active">
+            <div class="selection-container">
+                <div class="selection-group">
+                    <h2>Choose Your Course</h2>
+                    <div class="course-grid">
+                        <button class="course-btn" data-course="c">C Programming</button>
+                        <button class="course-btn" data-course="cpp">C++</button>
+                        <button class="course-btn" data-course="python">Python</button>
+                        <button class="course-btn" data-course="java">Java</button>
+                        <button class="course-btn" data-course="react">React</button>
+                        <button class="course-btn" data-course="html">HTML</button>
+                        <button class="course-btn" data-course="css">CSS</button>
+                        <button class="course-btn" data-course="sql">SQL</button>
+                    </div>
+                </div>
+
+                <div class="selection-group">
+                    <h2>Choose Difficulty Level</h2>
+                    <div class="difficulty-buttons">
+                        <button class="difficulty-btn" data-difficulty="easy">
+                            <span class="difficulty-icon">🟢</span>
+                            Easy
+                        </button>
+                        <button class="difficulty-btn" data-difficulty="medium">
+                            <span class="difficulty-icon">🟡</span>
+                            Medium
+                        </button>
+                        <button class="difficulty-btn" data-difficulty="hard">
+                            <span class="difficulty-icon">🔴</span>
+                            Hard
+                        </button>
+                    </div>
+                </div>
+
+                <button id="start-quiz-btn" class="start-btn" disabled>Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="current-course" class="course-badge"></span>
+                    <span id="current-difficulty" class="difficulty-badge"></span>
+                </div>
+                <div class="quiz-progress">
+                    <span id="question-counter">Question 1 of 10</span>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <button id="quit-quiz-btn" class="quit-btn">🚪 Quit Quiz</button>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text" class="question-text"></h2>
+                <div id="options-container" class="options-container"></div>
+                <div id="feedback" class="feedback hidden"></div>
+                <button id="next-btn" class="next-btn hidden">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <h2>Quiz Complete! 🎉</h2>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                        <span class="score-total">/ 10</span>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <p id="score-message"></p>
+                    <div class="score-breakdown">
+                        <div class="stat">
+                            <span class="stat-label">Correct:</span>
+                            <span id="correct-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Incorrect:</span>
+                            <span id="incorrect-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Accuracy:</span>
+                            <span id="accuracy" class="stat-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button id="restart-btn" class="action-btn primary">Take Another Quiz</button>
+                    <button id="review-btn" class="action-btn secondary">Review Answers</button>
+                    <button id="home-btn" class="action-btn home">🏠 Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="review-screen" class="screen">
+            <div class="review-container">
+                <h2>Answer Review</h2>
+                <div id="review-content" class="review-content"></div>
+                <button id="back-to-results-btn" class="action-btn">Back to Results</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="additional-questions.js"></script>
+    <script src="quiz-script.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
